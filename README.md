@@ -24,7 +24,7 @@ Simply copy this repo structure into your own organisation and delete what you d
 
 ## Example Usage
 
-This example repo is running a [single semgrep rule](https://github.com/CameronLonsdale/Appsec-Alerts/blob/main/semgrep-rules/jwt-decode-without-verify.yml) over an [example vulnerable repo](https://github.com/CameronLonsdale/Example-Vulnerable-Repo). The [scan ran](TODO LINK TO ACTION LOGS) via GitHub Actions and the finding was [committed back to the repo](TODO LINK TO COMMIT) so we don't alert on it again in the future.
+This example repo is running a [single semgrep rule](https://github.com/CameronLonsdale/Appsec-Alerts/blob/main/semgrep-rules/jwt-decode-without-verify.yml) over an [example vulnerable repo](https://github.com/CameronLonsdale/Example-Vulnerable-Repo). The [scan ran](https://github.com/CameronLonsdale/Appsec-Alerts/actions/runs/3167945424/jobs/5158794740) via GitHub Actions and the finding was [committed back to the repo](https://github.com/CameronLonsdale/Appsec-Alerts/commit/58ac38702f0a034824f28c85ae40cbbd82baae6d) so we don't alert on it again in the future.
 
 ## Recommendations
 
