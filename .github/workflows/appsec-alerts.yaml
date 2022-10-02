@@ -1,0 +1,54 @@
+name: appsec-alerts
+# Manual runs only for now
+on: workflow_dispatch
+
+jobs:
+  run-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      # Public repository which we want to alert on
+      - name: Checkout public repo
+        uses: actions/checkout@v3
+        with:
+          repository: TODO
+
+      # An example to checkout a private repository from your organisation
+      # This assumes a GitHub personal access token (PAT) in a repository secret
+      # You could instead use an SSH key as per the documentation - https://github.com/actions/checkout
+      # - name: Checkout private repo
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: MyOrg/private_repo
+      #     fetch-depth: 1
+      #     ref: green_branch
+      #     path: private_repo
+      #     token: ${{ secrets.MY_GITHUB_TOKEN }}
+      #     persist-credentials: false
+
+      # This can be configured to include whatever tools you need
+      - name: Setup dependencies
+        run: |
+          python3 -m pip install semgrep
+          pip install -r requirements.txt
+
+      # This runs a specific check, I recommend keeping each check as a seperate step
+      # in the workflow for ease of debugging and re-running failed checks 
+      - name: Check JWT missing verification
+        run:  python -m alert-scripts.alert_new_jwt_missing_verification
+
+      # The final step captures changes to the state/ directory and commits back to the repo.
+      # You may choose to do these steps after each check if you wish, because a failed check will
+      # abort the workflow and nothing will be saved.
+      - name: Capture state
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email '<>'
+          git add state
+          git diff-index --quiet HEAD || git commit -m "[automated] Updating state"
+          git status
+          git push
