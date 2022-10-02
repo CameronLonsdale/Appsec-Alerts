@@ -1,2 +1,2 @@
-# Appsec-Alerts
-A low effort, cheap design for tracking and alerting on dangerous patterns
+# 🚨 AppSec Alerts
+A low effort and cheap to run, framework for tracking and alerting on dangerous patterns
