@@ -12,15 +12,16 @@ jobs:
           fetch-depth: 1
 
       # Public repository which we want to alert on
-      - name: Checkout public repo
+      - name: Checkout public repo to scan
         uses: actions/checkout@v3
         with:
-          repository: TODO
+          repository: CameronLonsdale/Example-Vulnerable-Repo
+          path: Example-Vulnerable-Repo # You will want to specify a path here, otherwise GitHub will automatically CD you into the directory
 
       # An example to checkout a private repository from your organisation
       # This assumes a GitHub personal access token (PAT) in a repository secret
       # You could instead use an SSH key as per the documentation - https://github.com/actions/checkout
-      # - name: Checkout private repo
+      # - name: Checkout private repo to scan
       #   uses: actions/checkout@v3
       #   with:
       #     repository: MyOrg/private_repo
@@ -39,7 +40,7 @@ jobs:
       # This runs a specific check, I recommend keeping each check as a seperate step
       # in the workflow for ease of debugging and re-running failed checks 
       - name: Check JWT missing verification
-        run:  python -m alert-scripts.alert_new_jwt_missing_verification
+        run:  python -m alert-scripts.alert_jwt_missing_verification
 
       # The final step captures changes to the state/ directory and commits back to the repo.
       # You may choose to do these steps after each check if you wish, because a failed check will

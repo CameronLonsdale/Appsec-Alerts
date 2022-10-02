@@ -1,0 +1,23 @@
+rules:
+  - id: jwt-decode-without-verify
+    languages:
+      - javascript
+      - typescript
+    severity: WARNING
+    patterns:
+      - pattern-inside: |
+          $JWT = require('jsonwebtoken');
+          ...
+          function $FUNC(...) {
+            ...
+          }
+      - pattern-not-inside: |
+          ...
+          $JWT.verify($TOKEN, ...)
+          ...
+      - pattern-not-inside: |
+          ...
+          if (<... $JWT.verify($TOKEN, ...) ...>) { ... }
+          ...
+      - pattern: $JWT.decode($TOKEN, ...)
+    message: JWT decoding without signature verification
