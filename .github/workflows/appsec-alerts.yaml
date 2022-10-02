@@ -1,6 +1,10 @@
 name: appsec-alerts
-# Manual runs only for now
-on: workflow_dispatch
+on:
+  schedule:
+    # https://crontab.guru/#0_9_*_*_1-5
+    - cron:  '0 9 * * 1-5'
+  workflow_dispatch:
+    
 
 jobs:
   run-checks:
