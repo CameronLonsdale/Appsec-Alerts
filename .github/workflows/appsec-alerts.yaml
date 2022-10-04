@@ -1,8 +1,8 @@
 name: appsec-alerts
 on:
-  schedule:
+  #s chedule:
     # https://crontab.guru/#0_9_*_*_1-5
-    - cron:  '0 9 * * 1-5'
+  #  - cron:  '0 9 * * 1-5'
   workflow_dispatch:
     
 
